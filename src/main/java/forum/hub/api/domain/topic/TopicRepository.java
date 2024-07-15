@@ -1,2 +1,6 @@
-package forum.hub.api.domain.topic;public interface TopicRepository {
+package forum.hub.api.domain.topic;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface TopicRepository extends JpaRepository<Topic, Long> {
 }
