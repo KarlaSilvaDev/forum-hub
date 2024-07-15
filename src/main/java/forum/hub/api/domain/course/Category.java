@@ -1,6 +1,6 @@
 package forum.hub.api.domain.course;
 
-public enum Category{
+public enum Category {
     MOBILE,
     PROGRAMACAO,
     FRONT_END,
