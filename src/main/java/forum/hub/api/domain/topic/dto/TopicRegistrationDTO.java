@@ -5,16 +5,16 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public record TopicRegistrationDTO(
-        @NotBlank
+        @NotBlank(message = "{title.required}")
         @JsonAlias({"titulo"})
         String title,
-        @NotBlank
+        @NotBlank(message = "{message.required}")
         @JsonAlias({"mensagem"})
         String message,
-        @NotNull
+        @NotNull(message = "{authorId.required}")
         @JsonAlias({"autorId"})
         Long authorId,
-        @NotNull
+        @NotNull(message = "{courseId.required}")
         @JsonAlias({"cursoId"})
         Long courseId
 ) {

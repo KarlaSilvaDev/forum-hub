@@ -7,9 +7,9 @@ import jakarta.validation.constraints.NotNull;
 
 public record CourseRegistrationDTO (
         @JsonAlias("nome")
-        @NotBlank
+        @NotBlank(message = "{name.required}")
         String name,
         @JsonAlias("categoria")
-        @NotNull
+        @NotNull(message = "{category.required}")
         Category category
 ){ }

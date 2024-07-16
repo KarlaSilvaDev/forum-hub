@@ -6,12 +6,12 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 public record UserRegistrationDTO(@JsonAlias("nome")
-                                  @NotBlank
+                                  @NotBlank(message = "{name.required")
                                   String name,
-                                  @NotBlank
-                                  @Email
+                                  @NotBlank(message = "{email.required}")
+                                  @Email(message = "{email.invalid}")
                                   String email,
                                   @JsonAlias("senha")
-                                  @NotBlank
+                                  @NotBlank(message = "{password.required}")
                                   String password) {
 }
