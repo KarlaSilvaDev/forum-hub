@@ -1,7 +1,7 @@
 package forum.hub.api.domain.topic;
 
 import forum.hub.api.domain.course.Course;
-import forum.hub.api.domain.topic.dto.TopicRegistrationDTO;
+import forum.hub.api.domain.topic.dto.TopicUpdateDTO;
 import forum.hub.api.domain.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -37,10 +37,21 @@ public class Topic {
     @JoinColumn(name = "course_id", nullable = false)
     private Course course;
 
-    public void updateData(TopicRegistrationDTO data, User user, Course course) {
-        this.title = data.title();
-        this.message = data.message();
-        this.author = user;
-        this.course = course;
+    public void update(TopicUpdateDTO data, User user, Course course) {
+        if (data.title() != null){
+            this.title = data.title();
+        }
+
+        if (data.message() != null){
+            this.message = data.message();
+        }
+
+        if (data.authorId() != null){
+            this.author = user;
+        }
+
+        if (data.courseId() != null){
+            this.course = course;
+        }
     }
 }

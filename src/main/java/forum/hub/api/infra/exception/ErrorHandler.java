@@ -22,8 +22,8 @@ public class ErrorHandler {
     }
 
     @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity handleError404(){
-        return ResponseEntity.notFound().build();
+    public ResponseEntity handleError404(EntityNotFoundException ex){
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorMessage(ex.getMessage()));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

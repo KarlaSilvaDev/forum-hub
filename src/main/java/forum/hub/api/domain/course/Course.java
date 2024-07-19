@@ -1,5 +1,6 @@
 package forum.hub.api.domain.course;
 
+import forum.hub.api.domain.course.dto.CourseUpdateDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -21,4 +22,14 @@ public class Course {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Category category;
+
+    public void update(CourseUpdateDTO data) {
+        if (data.name() != null){
+            this.name = data.name();
+        }
+
+        if (data.category() != null){
+            this.category = Category.valueOf(data.category());
+        }
+    }
 }

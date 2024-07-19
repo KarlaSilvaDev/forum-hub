@@ -1,4 +1,4 @@
-package forum.hub.api.domain.topic.validations.general;
+package forum.hub.api.domain.topic.validations.registration;
 
 import forum.hub.api.domain.topic.dto.TopicRegistrationDTO;
 import forum.hub.api.domain.user.UserRepository;
@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class TopicAuthorExistenceValidator implements TopicCommonValidator {
+public class TopicAuthorExistenceRegistrationValidator implements TopicRegistrationValidator {
     @Autowired
     private UserRepository userRepository;
 

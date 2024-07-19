@@ -3,6 +3,7 @@ package forum.hub.api.controller;
 import forum.hub.api.domain.topic.TopicService;
 import forum.hub.api.domain.topic.dto.TopicDetailsDTO;
 import forum.hub.api.domain.topic.dto.TopicRegistrationDTO;
+import forum.hub.api.domain.topic.dto.TopicUpdateDTO;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,7 @@ public class TopicController {
 
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity update(@RequestBody @Valid TopicRegistrationDTO data, @PathVariable Long id){
+    public ResponseEntity update(@RequestBody @Valid TopicUpdateDTO data, @PathVariable Long id){
         var topicDetails = service.update(data, id);
         return ResponseEntity.ok(topicDetails);
     }

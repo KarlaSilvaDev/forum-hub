@@ -4,7 +4,7 @@ import forum.hub.api.domain.DataValidationException;
 import forum.hub.api.domain.course.CourseRepository;
 import forum.hub.api.domain.topic.dto.TopicDetailsDTO;
 import forum.hub.api.domain.topic.dto.TopicRegistrationDTO;
-import forum.hub.api.domain.topic.validations.general.TopicCommonValidator;
+import forum.hub.api.domain.topic.dto.TopicUpdateDTO;
 import forum.hub.api.domain.topic.validations.registration.TopicRegistrationValidator;
 import forum.hub.api.domain.topic.validations.update.TopicUpdateValidator;
 import forum.hub.api.domain.user.UserRepository;
@@ -25,14 +25,11 @@ public class TopicService {
     @Autowired
     private CourseRepository courseRepository;
     @Autowired
-    private List<TopicCommonValidator> topicCommonValidators;
-    @Autowired
     private List<TopicRegistrationValidator> topicRegistrationValidators;
     @Autowired
     private List<TopicUpdateValidator> topicUpdateValidators;
 
     public TopicDetailsDTO register(TopicRegistrationDTO data) {
-        topicCommonValidators.forEach(v -> v.validate(data));
         topicRegistrationValidators.forEach(v -> v.validate(data));
 
         var author = userRepository.getReferenceById(data.authorId());
@@ -50,24 +47,22 @@ public class TopicService {
     }
 
     public TopicDetailsDTO detail(Long id) {
-        var topicDetails = topicRepository.getReferenceById(id);
-        return new TopicDetailsDTO(topicDetails);
+        var topic = topicRepository.getReferenceById(id);
+        return new TopicDetailsDTO(topic);
     }
 
-    public TopicDetailsDTO update(TopicRegistrationDTO data, Long id) {
-        topicCommonValidators.forEach(v -> v.validate(data));
+    public TopicDetailsDTO update(TopicUpdateDTO data, Long id) {
         topicUpdateValidators.forEach(v -> v.validate(data, id));
 
         var topic = topicRepository.getReferenceById(id);
         var user = userRepository.getReferenceById(data.authorId());
         var course = courseRepository.getReferenceById(data.courseId());
-        topic.updateData(data, user, course);
+        topic.update(data, user, course);
 
         return new TopicDetailsDTO(topic);
     }
 
     public void delete(Long id) {
-
         var topicExists = topicRepository.existsById(id);
 
         if (!topicExists){
@@ -75,4 +70,6 @@ public class TopicService {
         }
         topicRepository.deleteById(id);
     }
+
+
 }

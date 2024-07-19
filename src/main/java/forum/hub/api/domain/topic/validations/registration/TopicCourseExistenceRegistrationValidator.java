@@ -1,6 +1,5 @@
-package forum.hub.api.domain.topic.validations.general;
+package forum.hub.api.domain.topic.validations.registration;
 
-import forum.hub.api.domain.DataValidationException;
 import forum.hub.api.domain.course.CourseRepository;
 import forum.hub.api.domain.topic.dto.TopicRegistrationDTO;
 import jakarta.persistence.EntityNotFoundException;
@@ -8,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class TopicCourseExistenceValidator implements TopicCommonValidator {
+public class TopicCourseExistenceRegistrationValidator implements TopicRegistrationValidator {
 
     @Autowired
     private CourseRepository courseRepository;

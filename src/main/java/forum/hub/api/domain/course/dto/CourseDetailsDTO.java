@@ -10,7 +10,8 @@ public record CourseDetailsDTO(Long id,
                                @JsonProperty("nome")
                                String name,
                                @JsonProperty("categoria")
-                               Category category) {
+                               Category category)
+{
     public CourseDetailsDTO(Course course) {
         this(course.getId(),
                 course.getName(),

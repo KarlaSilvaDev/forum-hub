@@ -2,6 +2,7 @@ package forum.hub.api.domain.user;
 
 import forum.hub.api.domain.profile.Profile;
 import forum.hub.api.domain.user.dto.UserRegistrationDTO;
+import forum.hub.api.domain.user.dto.UserUpdateDTO;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -46,6 +47,16 @@ public class User implements UserDetails {
         profiles.add(defaultProfile);
     }
 
+    public void update(UserUpdateDTO data) {
+        if (data.name() != null){
+            this.name = data.name();
+        }
+
+        if (data.password() != null){
+            this.password = data.password();
+        }
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("ROLE_USER"));
@@ -75,4 +86,6 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+
 }
